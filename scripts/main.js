@@ -15,12 +15,25 @@ function computerPlay() {
     return computerChoice.toLowerCase();
 }
 
+function checkValidChoice(choice) {
+    let validChoice = choice.toLowerCase();
+    let valid = false;
+    while (!valid) {
+        if (validChoice === 'rock' || validChoice === 'paper' || validChoice === 'scissors') {
+            valid = true;
+            return validChoice;
+        } else {
+            validChoice = prompt("You must choice Rock, Paper or Scissors!").toLowerCase();
+        }
+    }
+}
+
 //playerSelection()
 //console asks for users choice and assings to playerChoice
 //return playerChoice
 function playerSelction() {
     let playerChoice = prompt("Rock, Paper or Scissors? ");
-    return playerChoice.toLowerCase();
+    return checkValidChoice(playerChoice);
 }
 
 //playRound()
