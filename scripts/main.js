@@ -31,9 +31,10 @@ function checkValidChoice(choice) {
 //playerSelection()
 //console asks for users choice and assings to playerChoice
 //return playerChoice
-function playerSelction() {
-    let playerChoice = prompt("Rock, Paper or Scissors? ");
-    return checkValidChoice(playerChoice);
+function getPlayerChoice(e) {
+    let playerSelection = (e.target.id);
+    console.log(e.target.id);
+    playRound(playerSelection, computerPlay());
 }
 
 //playRound()
@@ -57,26 +58,9 @@ function playRound(playerChoice, computerChoice) {
     }  
 }
 
-function game() {
-    let computerScore = 0;
-    let playerScore = 0;
-    let result = '';
-    let count = 0;
-    let gaming = true;
-    while (gaming) {
-        result = (playRound(playerSelction(), computerPlay()));
-        console.log(result);
-        if (result[0] === 'C') {
-            computerScore += 1;
-        } else if ( result[0] === 'P') {
-            playerScore += 1;  
-        }  
-        console.log(computerScore, playerScore)    ;
-        count += 1;
-        if (count >= 5){
-            gaming = false;
-        }
-    }
+
+function showResult(compScore, playScore) {
+    console.log("I got here");
     if (computerScore === playerScore) {
         console.log("Game is a tie!");
     } else if (computerScore >= playerScore) {
@@ -88,4 +72,28 @@ function game() {
     }
 }
 
-game();
+
+let result = '';
+let computerScore = 0;
+let playerScore = 0;
+let count = 0;
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach(button => { button.addEventListener('click', getPlayerChoice) });
+
+
+
+
+
+    /*
+        
+        result = playRound(button.id, computerPlay());
+        console.log(result);
+        if (result[0] === 'C') {
+            computerScore += 1;
+        } else if ( result[0] === 'P') {
+            playerScore += 1;  
+        }  
+        console.log(computerScore, playerScore);
+        
+    })*/
