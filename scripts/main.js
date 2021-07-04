@@ -42,25 +42,59 @@ function getPlayerChoice(e) {
 function playRound(playerChoice, computerChoice) {
     //If computerChoice = playerChoice then winner is a tie
     if (computerChoice === playerChoice) {
-        return 'Tie';
+        count ++;
+        checkWinner();
+        //return 'Tie';
     } else if (computerChoice === 'rock' && playerChoice === 'scissors') {
-        return 'Computer wins, rock beats scissors.';
+        count ++;
+        computerScore ++;
+        checkWinner();
+        //return 'Computer wins, rock beats scissors.';
     } else if (computerChoice === 'paper' && playerChoice === 'rock') {
-        return 'Computer wins, paper beats rock.';
+        count ++;
+        computerScore ++;
+        checkWinner();
+        //return 'Computer wins, paper beats rock.';
     } else if (computerChoice === 'scissors' && playerChoice === 'paper') {
-        return 'Computer wins, scissors beats paper.';
+        count ++;
+        computerScore ++;
+        checkWinner();
+        //return 'Computer wins, scissors beats paper.';
     } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
-        return 'Player wins, rock beats scissors.';
+        count ++;
+        playerScore ++;
+        checkWinner();
+        //return 'Player wins, rock beats scissors.';
     } else if (playerChoice === 'paper' && computerChoice === 'rock') {
-        return 'Player wins, paper beats rock.';
+        count ++;
+        playerScore ++;
+        checkWinner();
+        //return 'Player wins, paper beats rock.';
     } else if (playerChoice === 'scissors' && computerChoice === 'paper') {
-        return 'Player wins, scissors beats paper.';
+        count ++;
+        playerScore ++;
+        checkWinner();
+        //return 'Player wins, scissors beats paper.';
     }  
 }
 
 
+function checkWinner() {
+    if (count == 5) {
+        let win = `${(computerScore > playerScore) ? 'computer wins' : 'player wins'}`;
+        updateWinner(win);
+    }
+}
+
+
+function updateWinner(winner) {
+    console.log(winner);
+    buttons.forEach(button => {
+        button.removeEventListener('click', getPlayerChoice);
+    });
+}
+
 function showResult(compScore, playScore) {
-    console.log("I got here");
     if (computerScore === playerScore) {
         console.log("Game is a tie!");
     } else if (computerScore >= playerScore) {
