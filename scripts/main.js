@@ -1,3 +1,12 @@
+let computerScore = 0;
+let playerScore = 0;
+const buttons = document.querySelectorAll('button');
+const scores = document.getElementById('scores');
+const result = document.querySelector('#result');
+
+buttons.forEach(button => { button.addEventListener('click', getPlayerChoice) });
+
+
 //computerPlay()
 function computerPlay() {
     //create random number to and assign to randomChoice-
@@ -42,50 +51,47 @@ function getPlayerChoice(e) {
 function playRound(playerChoice, computerChoice) {
     //If computerChoice = playerChoice then winner is a tie
     if (computerChoice === playerChoice) {
-        count ++;
-        checkWinner();
+        //checkWinner();
         //return 'Tie';
     } else if (computerChoice === 'rock' && playerChoice === 'scissors') {
-        count ++;
         computerScore ++;
-        checkWinner();
+        //checkWinner();
         //return 'Computer wins, rock beats scissors.';
     } else if (computerChoice === 'paper' && playerChoice === 'rock') {
-        count ++;
         computerScore ++;
-        checkWinner();
+        //checkWinner();
         //return 'Computer wins, paper beats rock.';
     } else if (computerChoice === 'scissors' && playerChoice === 'paper') {
-        count ++;
         computerScore ++;
-        checkWinner();
+        //checkWinner();
         //return 'Computer wins, scissors beats paper.';
     } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
-        count ++;
         playerScore ++;
-        checkWinner();
+        //checkWinner();
         //return 'Player wins, rock beats scissors.';
     } else if (playerChoice === 'paper' && computerChoice === 'rock') {
-        count ++;
         playerScore ++;
-        checkWinner();
+        //checkWinner();
         //return 'Player wins, paper beats rock.';
     } else if (playerChoice === 'scissors' && computerChoice === 'paper') {
-        count ++;
         playerScore ++;
-        checkWinner();
+        //checkWinner();
         //return 'Player wins, scissors beats paper.';
-    }  
+    }
+    updateScoreBoard(playerScore,computerScore);
+    checkWinner();  
 }
 
+function updateScoreBoard(pScore, cScore) {
+    scores.textContent = `Player Score: ${pScore} - Computer Score: ${cScore}`;
+}
 
 function checkWinner() {
-    if (count == 5) {
+    if (playerScore == 5 || computerScore == 5) {
         let win = `${(computerScore > playerScore) ? 'computer wins' : 'player wins'}`;
         updateWinner(win);
     }
 }
-
 
 function updateWinner(winner) {
     console.log(winner);
@@ -105,29 +111,3 @@ function showResult(compScore, playScore) {
                     computerScore + " points!");
     }
 }
-
-
-let result = '';
-let computerScore = 0;
-let playerScore = 0;
-let count = 0;
-const buttons = document.querySelectorAll('button');
-
-buttons.forEach(button => { button.addEventListener('click', getPlayerChoice) });
-
-
-
-
-
-    /*
-        
-        result = playRound(button.id, computerPlay());
-        console.log(result);
-        if (result[0] === 'C') {
-            computerScore += 1;
-        } else if ( result[0] === 'P') {
-            playerScore += 1;  
-        }  
-        console.log(computerScore, playerScore);
-        
-    })*/
